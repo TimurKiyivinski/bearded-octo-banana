@@ -66,6 +66,7 @@ main
 ; remaining code goes here
 
 ; initialize user input values
+    MOVLW   b'00000100'
     MOVWF   user_0100
     MOVLW   b'00000101'
     MOVWF   user_0101
