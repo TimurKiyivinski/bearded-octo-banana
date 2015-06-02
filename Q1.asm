@@ -1,6 +1,6 @@
 
 ;   PIC Type:   PIC16F873A
-;   Filename:   Q2.asm
+;   Filename:   Q1.asm
 ;   Author:     
 ;
 
@@ -121,6 +121,13 @@ main
     MOVWF   user_1110
     MOVLW   b'00001111'
     MOVWF   user_1111
+
+; inputs return 00010000 if true, 00000000 if false
+; all functions use a lookup table technique to compare values
+; true values will result in 00001111 in the lookup table, and thus
+; an incrememt of this value will be 00010000
+; by testing the 4th bit if set, the functions can return true or 
+; continue and return a reset value of false
 
 ; start testing inputs (func_w)
     MOVF    user_0000,  0
