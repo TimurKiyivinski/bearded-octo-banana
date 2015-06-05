@@ -78,6 +78,7 @@ sub_y_5     EQU 0x71
 ; z subroutine lookup data
 sub_z_0     EQU 0x72
 sub_z_1     EQU 0x73
+sub_z_2     EQU 0x74
 
 ;**********************************************************************
 
@@ -555,8 +556,10 @@ func_z:
     ; initialize lookup table
     MOVLW   b'00001011'
     MOVWF   sub_z_0
-    MOVLW   b'00000110'
+    MOVLW   b'00001000'
     MOVWF   sub_z_1
+    MOVLW   b'00000011'
+    MOVWF   sub_z_2
     ; move function argument to z
     MOVF    sub_arg,    0
     ; test W against lookup table
@@ -573,6 +576,13 @@ func_z:
     MOVF    sub_z_1,    0
     MOVWF   result_z
     BTFSC   sub_z_1,    4
+    RETURN
+    XORWF   sub_z_2,    1
+    INCF    sub_z_2,    1
+    BTFSC   sub_z_2,    4
+    MOVF    sub_z_2,    0
+    MOVWF   result_z
+    BTFSC   sub_z_2,    4
     RETURN
     ; write wrong
     MOVLW   b'00000000'
